@@ -3,7 +3,7 @@
 const int DataPin = 9;
 const int IRQpin =  3;
 
-#define pot A0
+#define pot A3
 
 PS2Keyboard keyboard;
 
