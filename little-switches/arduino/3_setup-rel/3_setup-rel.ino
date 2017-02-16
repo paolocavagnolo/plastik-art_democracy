@@ -59,65 +59,57 @@ void loop() {
     // check for some of the special keys
     if (c == '1') {
       digitalWrite(2,HIGH);
-      t1 = millis();
+      delay(tempo);
+      digitalWrite(4,LOW);
+      Serial.println(c);
+
     } 
     else if (c == '2') {
       digitalWrite(4,HIGH);
-      t2 = millis();
+      delay(tempo);
+      digitalWrite(4,LOW);
+      Serial.println(c);
     }
     else if (c == '3') {
       digitalWrite(5,HIGH);
-      t3 = millis();
+      delay(tempo);
+      digitalWrite(5,LOW);
+      Serial.println(c);
     }
     else if (c == '4') {
       digitalWrite(6,HIGH);
-      t4 = millis();
+      delay(tempo);
+      digitalWrite(6,LOW);
+      Serial.println(c);
     }
     else if (c == '5') {
       digitalWrite(7,HIGH);
-      t5 = millis();
+      delay(tempo);
+      digitalWrite(7,LOW);
+      Serial.println(c);
     }
     else if (c == '6') {
       digitalWrite(8,HIGH);
-      t6 = millis();
+      delay(tempo);
+      digitalWrite(8,LOW);
+      Serial.println(c);
     }
     else if (c == '7') {
       digitalWrite(A0,HIGH);
-      t7 = millis();
+      delay(tempo);
+      digitalWrite(A0,LOW);
+      Serial.println(c);
     }
     else if (c == '8') {
       digitalWrite(A1,HIGH);
-      t8 = millis();
+      delay(tempo);
+      digitalWrite(A1,LOW);
+      Serial.println(c);
     }
     else {
       Serial.print(c);
     }
   }
 
-  else {
-    if ((millis() - t1) > tempo) {
-      digitalWrite(2,LOW);
-    }
-    if ((millis() - t2) > tempo) {
-      digitalWrite(4,LOW);
-    }
-    if ((millis() - t3) > tempo) {
-      digitalWrite(5,LOW);
-    }
-    if ((millis() - t4) > tempo) {
-      digitalWrite(6,LOW);
-    }
-    if ((millis() - t5) > tempo) {
-      digitalWrite(7,LOW);
-    }
-    if ((millis() - t6) > tempo) {
-      digitalWrite(8,LOW);
-    }
-    if ((millis() - t7) > tempo) {
-      digitalWrite(A0,LOW);
-    }
-    if ((millis() - t8) > tempo) {
-      digitalWrite(A1,LOW);
-    }
-  }
+
 }
