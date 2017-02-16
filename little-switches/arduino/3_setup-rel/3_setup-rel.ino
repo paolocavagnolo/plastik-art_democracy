@@ -46,6 +46,7 @@ void setup() {
 
 void loop() {
   tempo = map(analogRead(pot),0,1023,50,200);
+  Serial.println(tempo);
 
   if (keyboard.available()) {
     
@@ -57,10 +58,6 @@ void loop() {
       digitalWrite(2,HIGH);
       t1 = millis();
     } 
-    else if (c == '2') {
-      digitalWrite(4,HIGH);
-      t2 = millis();
-    }
     else if (c == '3') {
       digitalWrite(5,HIGH);
       t3 = millis();
@@ -93,9 +90,6 @@ void loop() {
   else {
     if ((millis() - t1) > tempo) {
       digitalWrite(2,LOW);
-    }
-    if ((millis() - t2) > tempo) {
-      digitalWrite(4,LOW);
     }
     if ((millis() - t3) > tempo) {
       digitalWrite(5,LOW);
