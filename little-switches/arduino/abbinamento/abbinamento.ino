@@ -15,6 +15,15 @@ const int IRQpin =  3;
 
 PS2Keyboard keyboard;
 
+long t1 = 0;
+long t2 = 0;
+long t3 = 0;
+long t4 = 0;
+long t5 = 0;
+long t6 = 0;
+
+int tempo = 0;
+
 void setup() {
   delay(1000);
   keyboard.begin(DataPin, IRQpin);
@@ -32,53 +41,56 @@ void setup() {
 }
 
 void loop() {
+  tempo = map(analogRead(pot),0,1023,50,200);
+  Serial.print("tempo: ");
+  Serial.print(tempo);
+  Serial.println(" ms");
+
   if (keyboard.available()) {
     
     char c = keyboard.read();
 
     if (c == PS2_LEFTARROW) {
-      digitalWrite
-    } else if (c == PS2_RIGHTARROW) {
-      Serial.print("[Right]");
+      digitalWrite(zampaAS,HIGH);
+      t1 = millis();
     } else if (c == PS2_UPARROW) {
-      Serial.print("[Up]");
+      digitalWrite(zampaAD,HIGH);
+      t2 = millis();
+    } else if (c == PS2_RIGHTARROW) {
+      digitalWrite(zampaPS,HIGH);
+      t3 = millis();
     } else if (c == PS2_DOWNARROW) {
-      Serial.print("[Down]");
+      digitalWrite(zampaPD,HIGH);
+      t4 = millis();
+    } else if (c == 'p') {
+      digitalWrite(piede,HIGH);
+      t5 = millis();
+    } else if (c == 't') {
+      digitalWrite(tamburo,HIGH);
+      t6 = millis();
     }
     
     
-    }
+  }
 
   else {
     if ((millis() - t1) > tempo) {
-      digitalWrite(2,LOW);
+      digitalWrite(zampaAS,LOW);
     }
     if ((millis() - t2) > tempo) {
-      digitalWrite(4,LOW);
+      digitalWrite(zampaAD,LOW);
     }
     if ((millis() - t3) > tempo) {
-      digitalWrite(5,LOW);
+      digitalWrite(zampaPS,LOW);
     }
     if ((millis() - t4) > tempo) {
-      digitalWrite(6,LOW);
+      digitalWrite(zampaPD,LOW);
     }
     if ((millis() - t5) > tempo) {
       digitalWrite(7,LOW);
     }
     if ((millis() - t6) > tempo) {
       digitalWrite(8,LOW);
-    }
-    if ((millis() - t7) > tempo) {
-      digitalWrite(A0,LOW);
-    }
-    if ((millis() - t8) > tempo) {
-      digitalWrite(A1,LOW);
-    }
-    if ((millis() - t9) > tempo) {
-      digitalWrite(A2,LOW);
-    }
-    if ((millis() - t0) > tempo) {
-      digitalWrite(A3,LOW);
     }
   }
 }
