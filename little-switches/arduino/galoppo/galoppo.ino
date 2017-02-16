@@ -23,6 +23,7 @@ long t5 = 0;
 long t6 = 0;
 
 int tempo = 0;
+float w = 0;
 
 void setup() {
   delay(1000);
@@ -49,9 +50,10 @@ void setup() {
 }
 
 void loop() {
-  tempo = map(analogRead(pot),0,1023,50,200);
+  w = map(analogRead(pot),0,1023,0.25,3);
+
   Serial.print("tempo: ");
-  Serial.print(tempo);
+  Serial.print(w);
   Serial.println(" ms");
 
   if (keyboard.available()) {
@@ -59,40 +61,22 @@ void loop() {
     char c = keyboard.read();
 
     if (c == '1') {
-      digitalWrite(zampaAS,HIGH);
-      t1 = millis();
-    } else if (c == '2') {
-      digitalWrite(zampaAD,HIGH);
-      t2 = millis();
-    } else if (c == '3') {
-      digitalWrite(zampaPS,HIGH);
-      t3 = millis();
-    } else if (c == '4') {
-      digitalWrite(zampaPD,HIGH);
-      t4 = millis();
-    } else if (c == 'p') {
+      galoppo(w);
+    } 
+    else if (c == 'p') {
       digitalWrite(piede,HIGH);
       t5 = millis();
-    } else if (c == 't') {
+    } 
+    else if (c == 't') {
       digitalWrite(tamburo,HIGH);
       t6 = millis();
     }
-    
-    
+       
   }
 
   else {
-    if ((millis() - t1) > tempo) {
-      digitalWrite(zampaAS,LOW);
-    }
-    if ((millis() - t2) > tempo) {
-      digitalWrite(zampaAD,LOW);
-    }
-    if ((millis() - t3) > tempo) {
-      digitalWrite(zampaPS,LOW);
-    }
-    if ((millis() - t4) > tempo) {
-      digitalWrite(zampaPD,LOW);
+    if ((millis() - t5) > tempo) {
+      digitalWrite(piede,LOW);
     }
     if ((millis() - t5) > tempo) {
       digitalWrite(piede,LOW);
@@ -100,5 +84,41 @@ void loop() {
     if ((millis() - t6) > tempo) {
       digitalWrite(tamburo,LOW);
     }
+  }
+}
+
+void galoppo(float v) {
+  bool fine=false;
+  long ii = millis();
+  while (!fine) {
+    digitalWrite(zampaPS,HIGH);
+    if ((millis() - ii) > (300*v) {
+      digitalWrite(zampaPS,LOW);
+    } 
+
+    if ((millis() - ii) > (75*v)) {
+      digitalWrite(zampaPD,HIGH);
+    }
+    if ((millis() - ii) > (375*v)) {
+      digitalWrite(zampaPD,LOW);
+    }
+
+    if ((millis() - ii) > (150*v)) {
+      digitalWrite(zampaAS,HIGH);
+    }
+    if ((millis() - ii) > (450*v)) {
+      digitalWrite(zampaAS,HIGH);
+    }
+
+    if ((millis() - ii) > (225*v)) {
+      digitalWrite(zampaAD,HIGH);
+    }
+    if ((millis() - ii) > (525*v)) {
+      digitalWrite(zampaAD,HIGH);
+    }
+
+    
+
+    digitalWrite(zampaAD,HIGH);
   }
 }
