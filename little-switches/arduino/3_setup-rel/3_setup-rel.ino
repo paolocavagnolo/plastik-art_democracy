@@ -5,6 +5,17 @@ const int IRQpin =  3;
 
 PS2Keyboard keyboard;
 
+long t1 = 0;
+long t2 = 0;
+long t3 = 0;
+long t4 = 0;
+long t5 = 0;
+long t6 = 0;
+long t7 = 0;
+long t8 = 0;
+long t9 = 0;
+long t0 = 0;
+
 void setup() {
   delay(1000);
   keyboard.begin(DataPin, IRQpin);
