@@ -56,6 +56,7 @@ void loop() {
     char c = keyboard.read();
     
     Serial.println(c);
+  }
 
 
 }
