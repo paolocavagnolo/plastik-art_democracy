@@ -3,6 +3,13 @@
 const int DataPin = 9;
 const int IRQpin =  3;
 
+#define pot A3
+
+#define zampaAS 3
+#define zampaAD 6
+#define zampaPS 7
+#define zampaPD 8
+
 PS2Keyboard keyboard;
 
 void setup() {
@@ -11,7 +18,7 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Keyboard Test:");
 
-  pinMode(2,OUTPUT);
+  pinMode(2,OUTPUT
   pinMode(4,OUTPUT);
   pinMode(5,OUTPUT);
   pinMode(6,OUTPUT);
