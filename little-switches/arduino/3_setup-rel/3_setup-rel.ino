@@ -52,64 +52,10 @@ void loop() {
   tempo = map(analogRead(pot),0,1023,50,200);
 
   if (keyboard.available()) {
-    
-    // read the next key
+
     char c = keyboard.read();
     
-    // check for some of the special keys
-    if (c == '1') {
-      digitalWrite(2,HIGH);
-      delay(tempo);
-      digitalWrite(4,LOW);
-      Serial.println(c);
-
-    } 
-    else if (c == '2') {
-      digitalWrite(4,HIGH);
-      delay(tempo);
-      digitalWrite(4,LOW);
-      Serial.println(c);
-    }
-    else if (c == '3') {
-      digitalWrite(5,HIGH);
-      delay(tempo);
-      digitalWrite(5,LOW);
-      Serial.println(c);
-    }
-    else if (c == '4') {
-      digitalWrite(6,HIGH);
-      delay(tempo);
-      digitalWrite(6,LOW);
-      Serial.println(c);
-    }
-    else if (c == '5') {
-      digitalWrite(7,HIGH);
-      delay(tempo);
-      digitalWrite(7,LOW);
-      Serial.println(c);
-    }
-    else if (c == '6') {
-      digitalWrite(8,HIGH);
-      delay(tempo);
-      digitalWrite(8,LOW);
-      Serial.println(c);
-    }
-    else if (c == '7') {
-      digitalWrite(A0,HIGH);
-      delay(tempo);
-      digitalWrite(A0,LOW);
-      Serial.println(c);
-    }
-    else if (c == '8') {
-      digitalWrite(A1,HIGH);
-      delay(tempo);
-      digitalWrite(A1,LOW);
-      Serial.println(c);
-    }
-    else {
-      Serial.print(c);
-    }
-  }
+    Serial.println(c);
 
 
 }
