@@ -3,6 +3,8 @@
 const int DataPin = 9;
 const int IRQpin =  3;
 
+#define pot A0
+
 PS2Keyboard keyboard;
 
 long t1 = 0;
@@ -15,6 +17,8 @@ long t7 = 0;
 long t8 = 0;
 long t9 = 0;
 long t0 = 0;
+
+int tempo = 0;
 
 void setup() {
   delay(1000);
@@ -37,6 +41,8 @@ void setup() {
 }
 
 void loop() {
+  tempo = map(analogRead(pot),0,1023,50,200);
+
   if (keyboard.available()) {
     
     // read the next key

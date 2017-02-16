@@ -17,7 +17,7 @@ Il programma little-switches controlla 6 pistoni, su 3 installazioni differenti.
 
  2- **Setup Pot**: scaricalo o copialo da [qui](https://github.com/paolocavagnolo/plastik-art_democracy/blob/master/little-switches/arduino/2_setup-pot/2_setup-pot.ino). Leggere dal monitor seriale il numero della porta che cambia quando si muove il potenziometro
 
- 3- **Setup Relay**: scaricalo o copialo da [qui](https://github.com/paolocavagnolo/plastik-art_democracy/blob/master/little-switches/arduino/3_setup-rel/3_setup-rel.ino). Premi i tasti dall'1 allo 0, uno alla volta per capire cosa è collegato a cosa. Noi useremo solo i 4 delle zampe, gli altri li escluderemo dal codice.
+ 3- **Setup Relay**: scaricalo o copialo da [qui](https://github.com/paolocavagnolo/plastik-art_democracy/blob/master/little-switches/arduino/3_setup-rel/3_setup-rel.ino). Inserisci nei #define all'inizio del codice il valore trovato precedentemente del potenziometro. Premi i tasti dall'1 allo 0, uno alla volta per capire cosa è collegato a cosa. Noi useremo solo i 4 delle zampe, gli altri li escluderemo dal codice.
 
  4- **Abbinamento Zampe a frecce**
 
