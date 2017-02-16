@@ -14,7 +14,8 @@ const int IRQpin =  3;
 #define tamburo 2
 
 int volo = 400;
-int ciclo = 200;
+int attesaAppoggio = 75;
+int attesaAllungo = 150;
 
 
 PS2Keyboard keyboard;
@@ -66,12 +67,16 @@ void loop() {
   Serial.print("weight: ");
   Serial.println(w);
 
+  volo *= w;
+  attesaAppoggio *= w;
+  attesaAllungo *= w;
+
   if (keyboard.available()) {
     
     char c = keyboard.read();
 
     if (c == '1') {
-      galoppo(w);
+      galoppo();
     } 
     else if (c == 'p') {
       digitalWrite(piede,HIGH);
@@ -97,22 +102,22 @@ void loop() {
   }
 }
 
-void galoppo(float v) {
+void galoppo() {
   for (int i=0; i<10; i++) {
   digitalWrite(zampaPS,HIGH);
-  delay(75);
+  delay(attesaAppoggio);
   digitalWrite(zampaPD,HIGH);
-  delay(150);
+  delay(attesaAllungo);
   digitalWrite(zampaAS,HIGH);
-  delay(75);
+  delay(attesaAppoggio);
   digitalWrite(zampaAD,HIGH);
-  delay(400);
+  delay(volo);
   digitalWrite(zampaPS,LOW);
-  delay(75);
+  delay(attesaAppoggio);
   digitalWrite(zampaPD,LOW);
-  delay(150);
+  delay(attesaAllungo);
   digitalWrite(zampaAS,LOW);
-  delay(150);
+  delay(attesaAppoggio);
   digitalWrite(zampaAD,LOW);
   }
 }
