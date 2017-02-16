@@ -13,9 +13,9 @@ const int IRQpin =  3;
 #define piede A0
 #define tamburo 2
 
-int volo = 400;
-int attesaAppoggio = 75;
-int attesaAllungo = 150;
+int volo = 400; //tempo in ms delle gambe in aria
+int attesaAppoggio = 75; //tempo in ms dell'appoggio tra le gambe vicine (as e ap per esempio)
+int attesaAllungo = 150; //tempo in ms tra appoggio gambe davanti e gambe dietro
 
 
 PS2Keyboard keyboard;
