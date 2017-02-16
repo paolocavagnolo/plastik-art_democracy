@@ -122,7 +122,7 @@ void galoppo(float v) {
       as = millis();
       bas = false;
     }
-    if ((millis() - ii) > (pausaAppoggio+pausaAllungo+pausaAppoggio*v)) && bad) {
+    if (((millis() - ii) > (pausaAppoggio+pausaAllungo+pausaAppoggio*v)) && bad) {
       digitalWrite(zampaAD,HIGH);
       ad = millis();
       bad = false;
