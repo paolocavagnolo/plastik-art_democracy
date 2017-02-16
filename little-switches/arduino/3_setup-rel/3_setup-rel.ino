@@ -15,8 +15,6 @@ long t5 = 0;
 long t6 = 0;
 long t7 = 0;
 long t8 = 0;
-long t9 = 0;
-long t0 = 0;
 
 int tempo = 0;
 
@@ -32,19 +30,17 @@ void setup() {
   pinMode(6,OUTPUT);
   pinMode(7,OUTPUT);
   pinMode(8,OUTPUT);
-  pinMode(9,OUTPUT);
   pinMode(A0,OUTPUT);
   pinMode(A1,OUTPUT);
 
-  digitalWrite(2,LOW);
-  digitalWrite(4,LOW);
-  digitalWrite(5,LOW);
-  digitalWrite(6,LOW);
-  digitalWrite(7,LOW);
-  digitalWrite(8,LOW);
-  digitalWrite(9,LOW);
-  digitalWrite(A0,LOW);
-  digitalWrite(A1,LOW);
+  digital(2,OUTPUT);
+  pinMode(4,OUTPUT);
+  pinMode(5,OUTPUT);
+  pinMode(6,OUTPUT);
+  pinMode(7,OUTPUT);
+  pinMode(8,OUTPUT);
+  pinMode(A0,OUTPUT);
+  pinMode(A1,OUTPUT);
 
 }
 
@@ -52,11 +48,81 @@ void loop() {
   tempo = map(analogRead(pot),0,1023,50,200);
 
   if (keyboard.available()) {
-
+    
+    // read the next key
     char c = keyboard.read();
     
-    Serial.println(c);
+    // check for some of the special keys
+    if (c == '1') {
+      digitalWrite(2,HIGH);
+      t1 = millis();
+    } 
+    else if (c == '2') {
+      digitalWrite(4,HIGH);
+      t2 = millis();
+    }
+    else if (c == '3') {
+      digitalWrite(5,HIGH);
+      t3 = millis();
+    }
+    else if (c == '4') {
+      digitalWrite(6,HIGH);
+      t4 = millis();
+    }
+    else if (c == '5') {
+      digitalWrite(7,HIGH);
+      t5 = millis();
+    }
+    else if (c == '6') {
+      digitalWrite(8,HIGH);
+      t6 = millis();
+    }
+    else if (c == '7') {
+      digitalWrite(A0,HIGH);
+      t7 = millis();
+    }
+    else if (c == '8') {
+      digitalWrite(A1,HIGH);
+      t8 = millis();
+    }
+    else if (c == '9') {
+      digitalWrite(A2,HIGH);
+      t9 = millis();
+    }
+    else if (c == '0') {
+      digitalWrite(A3,HIGH);
+      t0 = millis();
+    }
+    else {
+      Serial.print(c);
+    }
   }
 
+  else {
+    if ((millis() - t1) > tempo) {
+      digitalWrite(2,LOW);
+    }
+    if ((millis() - t2) > tempo) {
+      digitalWrite(4,LOW);
+    }
+    if ((millis() - t3) > tempo) {
+      digitalWrite(5,LOW);
+    }
+    if ((millis() - t4) > tempo) {
+      digitalWrite(6,LOW);
+    }
+    if ((millis() - t5) > tempo) {
+      digitalWrite(7,LOW);
+    }
+    if ((millis() - t6) > tempo) {
+      digitalWrite(8,LOW);
+    }
+    if ((millis() - t7) > tempo) {
+      digitalWrite(A0,LOW);
+    }
+    if ((millis() - t8) > tempo) {
+      digitalWrite(A1,LOW);
+    }
 
+  }
 }
