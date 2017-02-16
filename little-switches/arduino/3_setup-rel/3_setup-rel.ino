@@ -85,14 +85,6 @@ void loop() {
       digitalWrite(A1,HIGH);
       t8 = millis();
     }
-    else if (c == '9') {
-      digitalWrite(A2,HIGH);
-      t9 = millis();
-    }
-    else if (c == '0') {
-      digitalWrite(A3,HIGH);
-      t0 = millis();
-    }
     else {
       Serial.print(c);
     }
