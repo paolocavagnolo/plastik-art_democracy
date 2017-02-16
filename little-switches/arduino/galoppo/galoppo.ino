@@ -22,7 +22,7 @@ long t4 = 0;
 long t5 = 0;
 long t6 = 0;
 
-int tempo = 0;
+int tempo = 78;
 float w = 0;
 
 void setup() {
