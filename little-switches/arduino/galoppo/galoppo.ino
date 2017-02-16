@@ -52,9 +52,8 @@ void setup() {
 void loop() {
   w = map(analogRead(pot),0,1023,0.25,3);
 
-  Serial.print("tempo: ");
-  Serial.print(w);
-  Serial.println(" ms");
+  Serial.print("weight: ");
+  Serial.println(w);
 
   if (keyboard.available()) {
     
