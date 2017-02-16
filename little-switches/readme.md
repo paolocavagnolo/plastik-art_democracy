@@ -12,22 +12,12 @@ Il programma little-switches controlla 6 pistoni, su 3 installazioni differenti.
  - scaricare i file descritti di seguito, caricarli e provarli uno ad uno
 
 ## lista dei test preliminare da effettuare
- 1- **Setup Keyboard**: scaricalo o copialo da [qui](https://github.com/paolocavagnolo/plastik-art_democracy/little-swithces/1_setup-key/1_setup-key.ino). Dopo averlo caricato, aprire il monitor seriale e verificare il valore prodotto da alcuni tasti della tastiera: dal 1 allo 0 e della lettera q, dovrebbero essere:
-|tasto   |valore   |
-|:-:|:-:|
-|1   | 49  |
-|2   | 50  |
-|3   | 51  |
-|4   | 52  |
-|5   | 53  |
-|6   | 54  |
-|7   | 55  |
-|8   | 56  |
-|9   | 57  |
-|0   | 58  |
-|q   | 59  |
+ 1- **Setup Keyboard**: scaricalo o copialo da [qui](https://github.com/paolocavagnolo/plastik-art_democracy/little-swithces/1_setup-key/1_setup-key.ino). Dopo averlo caricato, aprire il monitor seriale e impostare la velocità (*baudrate* in basso a destra) su 9600. Verificare che la tastiera funzioni correttamente.
 
 
+ 2- **Setup Pot**: scaricalo o copialo da [qui](https://github.com/paolocavagnolo/plastik-art_democracy/little-swithces/2_setup-pot/2_setup-pot.ino). Leggere dal monitor seriale il numero della porta che cambia quando si muove il potenziometro
 
- 2- **Setup Relay**: scaricalo o copialo da [qui](https://github.com/paolocavagnolo/plastik-art_democracy/little-swithces/2_setup-rel/2_setup-rel.ino). 
+ 3- **Setup Relay**: 
+
+
 
