@@ -13,6 +13,9 @@ const int IRQpin =  3;
 #define piede A0
 #define tamburo 2
 
+int volo = 400;
+int ciclo = 200;
+
 
 PS2Keyboard keyboard;
 
@@ -25,6 +28,8 @@ long t6 = 0;
 
 int tempo = 78;
 float w = 0;
+
+
 
 float mapfloat(float x, float in_min, float in_max, float out_min, float out_max)
 {
@@ -93,60 +98,21 @@ void loop() {
 }
 
 void galoppo(float v) {
-  int aa = 0;
-  long ps,pd,as,ad;
-  bool bps = true;
-  bool bpd = true;
-  bool bas = true;
-  bool bad = true;
-
-
-  bool fine=false;
-  long ii = millis();
-  while (!fine) {
-    if (bps) {
-      digitalWrite(zampaPS,HIGH);
-      ps = millis();
-      bps = false;
-    }  
-    if (((millis() - ii) > (75*v)) && bpd)  {
-      digitalWrite(zampaPD,HIGH);
-      pd = millis();
-      bpd = false;
-    }
-    if (((millis() - ii) > (75+125)*v) && bas) {
-      digitalWrite(zampaAS,HIGH);
-      as = millis();
-      bas = false;
-    }
-    if ((millis() - ii) > (75+125+75)*v) && bad) {
-      digitalWrite(zampaAD,HIGH);
-      ad = millis();
-      bad = false;
-    }
-
-    if ((millis() - ii) > ((ps+200)*v)) {
-      digitalWrite(zampaPS,LOW);
-    } 
-    if ((millis() - ii) > ((pd+200)*v)) {
-      digitalWrite(zampaPD,LOW);
-    }
-    if ((millis() - ii) > ((as+200)*v)) {
-      digitalWrite(zampaAS,LOW);
-    }
-    if ((millis() - ii) > ((ad+200)*v)) {
-      digitalWrite(zampaAD,LOW);
-      ii = millis();
-      bps = true;
-      bpd = true;
-      bas = true;
-      bad = true;  
-      aa++;
-    }
-
-    if (aa > 10) {
-      fine = true;
-    }
-
+  for (int i=0; i<10; i++) {
+  digitalWrite(zampaPS,HIGH);
+  delay(75);
+  digitalWrite(zampaPD,HIGH);
+  delay(150);
+  digitalWrite(zampaAS,HIGH);
+  delay(75);
+  digitalWrite(zampaAD,HIGH);
+  delay(400);
+  digitalWrite(zampaPS,LOW);
+  delay(75);
+  digitalWrite(zampaPD,LOW);
+  delay(150);
+  digitalWrite(zampaAS,LOW);
+  delay(150);
+  digitalWrite(zampaAD,LOW);
   }
 }
