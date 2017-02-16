@@ -25,6 +25,11 @@ long t6 = 0;
 int tempo = 78;
 float w = 0;
 
+float mapfloat(float x, float in_min, float in_max, float out_min, float out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
 void setup() {
   delay(1000);
   keyboard.begin(DataPin, IRQpin);
@@ -50,7 +55,7 @@ void setup() {
 }
 
 void loop() {
-  w = map(analogRead(pot)/1.0,0,1023,0.25,3);
+  w = mapfloat(analogRead(pot)/1.0,0,1023,0.25,3);
 
   Serial.print("weight: ");
   Serial.println(w);
@@ -87,6 +92,8 @@ void loop() {
 }
 
 void galoppo(float v) {
+  int aa = 0;
+
   bool fine=false;
   long ii = millis();
   while (!fine) {
@@ -114,6 +121,9 @@ void galoppo(float v) {
     }
     if ((millis() - ii) > (525*v)) {
       digitalWrite(zampaAD,LOW);
+      a++;
+    }
+    if (aa > 10) {
       fine = true;
     }
 
