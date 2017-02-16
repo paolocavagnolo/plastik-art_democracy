@@ -50,7 +50,7 @@ void setup() {
 }
 
 void loop() {
-  w = map(analogRead(pot),0,1023,0.25,3);
+  w = map(analogRead(pot)/1.0,0,1023,0.25,3);
 
   Serial.print("weight: ");
   Serial.println(w);
@@ -91,7 +91,7 @@ void galoppo(float v) {
   long ii = millis();
   while (!fine) {
     digitalWrite(zampaPS,HIGH);
-    if ((millis() - ii) > (300*v) {
+    if ((millis() - ii) > (300*v)) {
       digitalWrite(zampaPS,LOW);
     } 
 
@@ -106,14 +106,14 @@ void galoppo(float v) {
       digitalWrite(zampaAS,HIGH);
     }
     if ((millis() - ii) > (450*v)) {
-      digitalWrite(zampaAS,HIGH);
+      digitalWrite(zampaAS,LOW);
     }
 
     if ((millis() - ii) > (225*v)) {
       digitalWrite(zampaAD,HIGH);
     }
     if ((millis() - ii) > (525*v)) {
-      digitalWrite(zampaAD,HIGH);
+      digitalWrite(zampaAD,LOW);
       fine = true;
     }
 
