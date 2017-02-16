@@ -115,10 +115,8 @@ void galoppo(float v) {
     }
     if ((millis() - ii) > (525*v)) {
       digitalWrite(zampaAD,HIGH);
+      fine = true;
     }
 
-    
-
-    digitalWrite(zampaAD,HIGH);
   }
 }
