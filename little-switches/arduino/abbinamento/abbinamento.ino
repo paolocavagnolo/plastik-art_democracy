@@ -5,13 +5,13 @@ const int IRQpin =  3;
 
 #define pot A3
 
-#define zampaAS 3
+#define zampaAS 8
 #define zampaAD 6
 #define zampaPS 7
-#define zampaPD 8
+#define zampaPD 5
 
-#define piede 4
-#define tamburo A1
+#define piede A0
+#define tamburo 2
 
 PS2Keyboard keyboard;
 
@@ -37,6 +37,14 @@ void setup() {
 
   pinMode(piede,OUTPUT);
   pinMode(tamburo,OUTPUT);
+
+  digitalWrite(zampaAS,LOW);
+  digitalWrite(zampaAD,LOW);
+  digitalWrite(zampaPS,LOW);
+  digitalWrite(zampaPD,LOW);
+
+  digitalWrite(piede,LOW);
+  digitalWrite(tamburo,LOW);
 
 }
 
@@ -87,10 +95,10 @@ void loop() {
       digitalWrite(zampaPD,LOW);
     }
     if ((millis() - t5) > tempo) {
-      digitalWrite(7,LOW);
+      digitalWrite(piede,LOW);
     }
     if ((millis() - t6) > tempo) {
-      digitalWrite(8,LOW);
+      digitalWrite(tamburo,LOW);
     }
   }
 }
