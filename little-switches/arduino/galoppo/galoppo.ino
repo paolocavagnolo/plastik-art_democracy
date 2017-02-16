@@ -13,9 +13,6 @@ const int IRQpin =  3;
 #define piede A0
 #define tamburo 2
 
-#define pausaAppoggio 75
-#define pausaAllungo 150
-#define volo 400
 
 PS2Keyboard keyboard;
 
@@ -103,39 +100,47 @@ void galoppo(float v) {
   bool bas = true;
   bool bad = true;
 
+
   bool fine=false;
   long ii = millis();
-
   while (!fine) {
     if (bps) {
       digitalWrite(zampaPS,HIGH);
       ps = millis();
+      bps = false;
     }  
-    if ((millis() - ii) > (pausaAppoggio*v)) {
+    if (((millis() - ii) > (75*v)) && bpd)  {
       digitalWrite(zampaPD,HIGH);
       pd = millis();
+      bpd = false;
     }
-    if ((millis() - ii) > (pausaAppoggio+pausaAllungo*v))  {
+    if (((millis() - ii) > (75+125)*v) && bas) {
       digitalWrite(zampaAS,HIGH);
       as = millis();
+      bas = false;
     }
-    if ((millis() - ii) > (pausaAppoggio+pausaAllungo+pausaAppoggio*v)) {
+    if ((millis() - ii) > (75+125+75)*v) && bad) {
       digitalWrite(zampaAD,HIGH);
       ad = millis();
+      bad = false;
     }
 
-    if ((millis() - ii) > ((ps+volo)*v)) {
+    if ((millis() - ii) > ((ps+200)*v)) {
       digitalWrite(zampaPS,LOW);
     } 
-    if ((millis() - ii) > ((pd+volo)*v)) {
+    if ((millis() - ii) > ((pd+200)*v)) {
       digitalWrite(zampaPD,LOW);
     }
-    if ((millis() - ii) > ((as+volo)*v)) {
+    if ((millis() - ii) > ((as+200)*v)) {
       digitalWrite(zampaAS,LOW);
     }
-    if ((millis() - ii) > ((ad+volo)*v)) {
+    if ((millis() - ii) > ((ad+200)*v)) {
       digitalWrite(zampaAD,LOW);
       ii = millis();
+      bps = true;
+      bpd = true;
+      bas = true;
+      bad = true;  
       aa++;
     }
 
