@@ -67,16 +67,12 @@ void loop() {
   Serial.print("weight: ");
   Serial.println(w);
 
-  volo *= w;
-  attesaAppoggio *= w;
-  attesaAllungo *= w;
-
   if (keyboard.available()) {
     
     char c = keyboard.read();
 
     if (c == '1') {
-      galoppo();
+      galoppo(w);
     } 
     else if (c == 'p') {
       digitalWrite(piede,HIGH);
@@ -102,22 +98,22 @@ void loop() {
   }
 }
 
-void galoppo() {
+void galoppo(float w) {
   for (int i=0; i<10; i++) {
   digitalWrite(zampaPS,HIGH);
-  delay(attesaAppoggio);
+  delay(attesaAppoggio*w);
   digitalWrite(zampaPD,HIGH);
-  delay(attesaAllungo);
+  delay(attesaAllungo*w);
   digitalWrite(zampaAS,HIGH);
-  delay(attesaAppoggio);
+  delay(attesaAppoggio*w);
   digitalWrite(zampaAD,HIGH);
-  delay(volo);
+  delay(volo*w);
   digitalWrite(zampaPS,LOW);
-  delay(attesaAppoggio);
+  delay(attesaAppoggio*w);
   digitalWrite(zampaPD,LOW);
-  delay(attesaAllungo);
+  delay(attesaAllungo*w);
   digitalWrite(zampaAS,LOW);
-  delay(attesaAppoggio);
+  delay(attesaAppoggio*w);
   digitalWrite(zampaAD,LOW);
   }
 }
