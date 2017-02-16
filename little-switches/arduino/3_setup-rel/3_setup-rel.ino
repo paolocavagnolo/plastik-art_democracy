@@ -35,8 +35,16 @@ void setup() {
   pinMode(9,OUTPUT);
   pinMode(A0,OUTPUT);
   pinMode(A1,OUTPUT);
-  pinMode(A2,OUTPUT);
-  pinMode(A3,OUTPUT);
+
+  digitalWrite(2,LOW);
+  digitalWrite(4,LOW);
+  digitalWrite(5,LOW);
+  digitalWrite(6,LOW);
+  digitalWrite(7,LOW);
+  digitalWrite(8,LOW);
+  digitalWrite(9,LOW);
+  digitalWrite(A0,LOW);
+  digitalWrite(A1,LOW);
 
 }
 
