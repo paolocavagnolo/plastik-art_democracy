@@ -57,7 +57,6 @@ void loop() {
   if (keyboard.available()) {
     
     char c = keyboard.read();
-    Serial.println
 
     if (c == '1') {
       digitalWrite(zampaAS,HIGH);
