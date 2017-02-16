@@ -103,29 +103,25 @@ void galoppo(float v) {
   bool bas = true;
   bool bad = true;
 
-
   bool fine=false;
   long ii = millis();
+
   while (!fine) {
     if (bps) {
       digitalWrite(zampaPS,HIGH);
       ps = millis();
-      bps = false;
     }  
-    if (((millis() - ii) > (pausaAppoggio*v)) && bpd)  {
+    if ((millis() - ii) > (pausaAppoggio*v)) {
       digitalWrite(zampaPD,HIGH);
       pd = millis();
-      bpd = false;
     }
-    if (((millis() - ii) > (pausaAppoggio+pausaAllungo*v)) && bas) {
+    if ((millis() - ii) > (pausaAppoggio+pausaAllungo*v))  {
       digitalWrite(zampaAS,HIGH);
       as = millis();
-      bas = false;
     }
-    if (((millis() - ii) > (pausaAppoggio+pausaAllungo+pausaAppoggio*v)) && bad) {
+    if ((millis() - ii) > (pausaAppoggio+pausaAllungo+pausaAppoggio*v)) {
       digitalWrite(zampaAD,HIGH);
       ad = millis();
-      bad = false;
     }
 
     if ((millis() - ii) > ((ps+volo)*v)) {
@@ -140,10 +136,6 @@ void galoppo(float v) {
     if ((millis() - ii) > ((ad+volo)*v)) {
       digitalWrite(zampaAD,LOW);
       ii = millis();
-      bps = true;
-      bpd = true;
-      bas = true;
-      bad = true;  
       aa++;
     }
 
