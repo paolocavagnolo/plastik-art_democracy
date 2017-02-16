@@ -127,6 +127,7 @@ void galoppo(float v) {
     if (aa > 10) {
       fine = true;
     }
+    delay(75);
 
   }
 }
