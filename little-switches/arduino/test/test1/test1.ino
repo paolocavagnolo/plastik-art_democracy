@@ -40,7 +40,7 @@ void loop() {
     for (int j=0; j<=20; j+=2) {
       a = j * 50;
       Serial.print(a);
-      delay(4000);
+      delay(2000);
       Serial.println(".");
 
       //testo

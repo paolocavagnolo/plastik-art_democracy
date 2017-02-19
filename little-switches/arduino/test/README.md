@@ -15,5 +15,14 @@
  - Sostituire la tastiera con due pulsanti (pin liberi 9,10,11,12,13)
 
 ## Test da effettuare
- - Un ciclo sulle 4 gambe con la funzione millis - con diverse aperture delle gambe - stampa in seriale il tempo di apertura delle gambe, nel frattempo scrivo in seriale con la tastiera.
+ - **TEST1**: ciclo semplice - senza tastiera - con delay.
+ 	- testo i tempi necessari per l'apertura completa delle gambe
+ 	- testo i relè
+
+ - **TEST2**: ciclo con millis - con tastiera - stampa in seriale il tempo di apertura delle gambe, nel frattempo scrivo in seriale con la tastiera.
+ 	- testo problematiche con i millis
+ 	- testo interferenze della tastiera
  
+ - **TEST3**: ritesto galappo con i tempi giusti di apertura gambe
+ 	- testo il codice di prima, ripulito dal float e dal pot.
+ 	- 
