@@ -25,4 +25,7 @@
  
  - **TEST3**: ritesto galappo con i tempi giusti di apertura gambe
  	- testo il codice di prima, ripulito dal float e dal pot.
- 	- 
+ 	- testo i nuovi tempi di apertura delle gambe
+ 	- testo la galoppata
+
+ - **TEST4**: testo la galoppata con millis - meglio?
