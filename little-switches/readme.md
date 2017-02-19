@@ -21,7 +21,7 @@ Il programma little-switches controlla 6 pistoni, su 3 installazioni differenti.
 
  4- **Abbinamento Zampe a frecce**: scaricalo o copialo da [qui](https://github.com/paolocavagnolo/plastik-art_democracy/blob/master/little-switches/arduino/abbinamento/abbinamento.ino). INSERISCI ALL'INIZIO I PARAMETRI CORRETTI APPENA SCOPERTI DENTRO AI DEFINE.
 
- 5- **Galoppo**: scaricalo o copialo da [qui](https://github.com/paolocavagnolo/plastik-art_democracy/blob/master/little-switches/arduino/galoppo/galoppo.ino). Da testare
+ 5- **Galoppo**: scaricalo o copialo da [qui](https://github.com/paolocavagnolo/plastik-art_democracy/blob/master/little-switches/arduino/galoppo/galoppo.ino). Testato
 
 
 
