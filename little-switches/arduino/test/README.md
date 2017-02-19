@@ -29,3 +29,7 @@
  	- testo la galoppata
 
  - **TEST4**: testo la galoppata con millis - meglio?
+  	- ho aggiunto il tempo di attesa delle gambe a terra
+
+ - **TEST5**: ultimo codice ma con i pulsanti anzichè la tastiera
+ 	- che sia questo il problema?
