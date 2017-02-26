@@ -130,7 +130,6 @@ void loop() {
           break;
         case 's':
           dataOut[completo] = 15500000;
-          Serial2.print(dataOut);
           completo = 6;
           break;
         case 'z':
