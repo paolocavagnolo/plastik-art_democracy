@@ -21,22 +21,13 @@ bool oki = false;
 uint32_t dataOut = 0;
 uint32_t dataIn = 0;
 
-void loop() {
-  /*// put your main code here, to run repeatedly:
-    if (digitalRead(12)) {
-    digitalWrite(52,HIGH);
-    if (oki) {
-      Serial2.println("ciao");
-      oki = false;
-    }
-    }
-    else {
-    digitalWrite(52,LOW);
-    oki = true;
-    }*/
-  if (Serial.available()) {
-    Serial2.print(Serial.parseInt());
-  }
 
+void loop() {
+
+  if (Serial.available()) {
+    dataIn = Serial.parseInt();
+    Serial.println(dataIn)
+    
+  }
 
 }
