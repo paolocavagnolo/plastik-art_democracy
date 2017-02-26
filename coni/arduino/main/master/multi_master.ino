@@ -119,8 +119,8 @@ void loop() {
           completo++;
           break;
         case 'E':
-          if (dataIn[0] > 360) { //vel E
-            dataOut = dataIn + 11500000;
+          if (dataIn > 360) { //vel E
+            dataOut[0] = dataIn + 11500000;
           }
           else { //abs E
             dataOut[0] = dataIn * (100800 / 360) + 20500000;
