@@ -60,10 +60,10 @@ void loop() {
           break;
         case 'A':
           if (dataIn > 360) { //vel A
-            dataOut[0] = dataIn + 1500000;
+            dataOut[completo] = dataIn + 1500000;
           }
           else { //abs A
-            dataOut[0] = dataIn * (100800 / 360) + 16500000;
+            dataOut[completo] = dataIn * (100800 / 360) + 16500000;
           }
           Serial.print(tag);
           completo = 6;
@@ -75,10 +75,10 @@ void loop() {
           break;
         case 'B':   //vel B
           if (dataIn > 360) { //vel B
-            dataOut[0] = dataIn + 3500000;
+            dataOut[completo] = dataIn + 3500000;
           }
           else { //abs B
-            dataOut[0] = dataIn * (100800 / 360) + 17500000;
+            dataOut[completo] = dataIn * (100800 / 360) + 17500000;
           }
           Serial.print(tag);
           completo = 6;
@@ -90,10 +90,10 @@ void loop() {
           break;
         case 'C':
           if (dataIn > 360) { //vel C
-            dataOut[0] = dataIn + 7500000;
+            dataOut[completo] = dataIn + 7500000;
           }
           else { //abs C
-            dataOut[0] = dataIn * (100800 / 360) + 18500000;
+            dataOut[completo] = dataIn * (100800 / 360) + 18500000;
           }
           Serial.print(tag);
           completo = 6;
@@ -105,10 +105,10 @@ void loop() {
           break;
         case 'D':
           if (dataIn > 360) { //vel D
-            dataOut[0] = dataIn + 9500000;
+            dataOut[completo] = dataIn + 9500000;
           }
           else { //abs D
-            dataOut[0] = dataIn * (100800 / 360) + 19500000;
+            dataOut[completo] = dataIn * (100800 / 360) + 19500000;
           }
           Serial.print(tag);
           completo = 6;
@@ -120,39 +120,39 @@ void loop() {
           break;
         case 'E':
           if (dataIn > 360) { //vel E
-            dataOut[0] = dataIn + 11500000;
+            dataOut[completo] = dataIn + 11500000;
           }
           else { //abs E
-            dataOut[0] = dataIn * (100800 / 360) + 20500000;
+            dataOut[completo] = dataIn * (100800 / 360) + 20500000;
           }
           Serial.print(tag);
           completo++;
           break;
         case 's':
-          dataOut[0] = 15500000;
+          dataOut[completo] = 15500000;
           Serial2.print(dataOut);
           completo = 6;
           break;
         case 'z':
           switch (dataIn) {
             case 1:
-              dataOut[0] = 4500000;
+              dataOut[completo] = 4500000;
               completo = 6;
               break;
             case 2:
-              dataOut[0] = 5500000;
+              dataOut[completo] = 5500000;
               completo = 6;
               break;
             case 3:
-              dataOut[0] = 12500000;
+              dataOut[completo] = 12500000;
               completo = 6;
               break;
             case 4:
-              dataOut[0] = 13500000;
+              dataOut[completo] = 13500000;
               completo = 6;
               break;
             case 5:
-              dataOut[0] = 14500000;
+              dataOut[completo] = 14500000;
               completo = 6;
               break;
             default:
@@ -167,7 +167,7 @@ void loop() {
 
       Serial.print(dataIn);
       Serial.print(" // ");
-      Serial.print(dataOut);
+      Serial.print(dataOut[completo]);
       Serial.print(" // ");
       Serial.println(completo)
 
