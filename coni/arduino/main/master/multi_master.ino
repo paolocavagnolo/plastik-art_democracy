@@ -168,7 +168,7 @@ void loop() {
       Serial.print(" // ");
       Serial.print(dataOut[completo]);
       Serial.print(" // ");
-      Serial.println(completo)
+      Serial.println(completo);
 
       inString = "";
 
