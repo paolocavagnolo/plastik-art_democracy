@@ -1,22 +1,21 @@
 # The big cones machine
 
-## TODO
- - pulsante sulla scatola di controllo
- - servono i connettori
- 
-
 ## scatola di controllo
  - **INPUT**:
- 	- 4 potenziometri (test) + 1 pulsante (start)
+ 	- 1 x Pulsante di avvio
  	- 1 x CONNETTORE DMX 3 POLI PER BUS RS485
  
  - **OUTPUT**:
  	- segnale RS485 per controllo di due arduino sullo stesso BUS
+ 	- audio stereo bilanciato
 
  - **PROCESS**:
- 	- ARDUINO legge pulsante e potenziometri
+ 	- ARDUINO legge pulsante
  	- ARDUINO manda a RS485 comandi in seriale
  	- RS485 manda a bus comandi in seriale
+ 	- ARDUINO manda a wave trigger segnale avvio audio
+ 	- Wave trigger manda a PROEL DB2A audio stereo non bilanciato
+ 	- PROEL DB2A manda in uscita audio stereo bilanciato
 
  - **COMPONENTI**:
  	- 1 x ARDUINO
