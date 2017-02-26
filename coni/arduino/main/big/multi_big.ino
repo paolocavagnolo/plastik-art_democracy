@@ -1,5 +1,6 @@
 #include <SoftwareSerial.h>
 #include <AccelStepper.h>
+#include <MultiStepper.h>
 
 #define pinRX 11
 #define pinTX 12
@@ -29,6 +30,7 @@ SoftwareSerial mySerial(pinRX, pinTX);
 AccelStepper stepper_C(1, pinStep_C, pinDirection_C);
 AccelStepper stepper_D(1, pinStep_D, pinDirection_D);
 AccelStepper stepper_E(1, pinStep_E, pinDirection_E);
+MultiStepper steppers;
 
 void setup() {
   mySerial.begin(4800);
@@ -42,6 +44,10 @@ void setup() {
   //E
   stepper_E.setMaxSpeed(MAXSPEED);
   stepper_E.setAcceleration(MAXACC);
+
+  steppers.addStepper(stepper_C);
+  steppers.addStepper(stepper_D);
+  steppers.addStepper(stepper_E);
 
 
   //200 step per rev  (motor)
@@ -62,9 +68,7 @@ void setup() {
   //zerosE();
 }
 
-long posC = 0;
-long posD = 0;
-long posE = 0;
+long positions[3] = {0,0,0};
 
 uint32_t velC = 1000;
 uint32_t velD = 1000;
@@ -72,12 +76,14 @@ uint32_t velE = 1000;
 
 uint32_t dataIn = 0;
 
+bool go = false;
+
 void loop() {
 
   if (mySerial.available()) {
     dataIn = mySerial.parseInt();
     if ((dataIn >= 6000000) && (dataIn < 7000000)) {
-      posC += dataIn - 6500000;
+      positions[0] += dataIn - 6500000;
       //Serial.print("posC");
       //Serial.println(posC);
     }
@@ -89,7 +95,7 @@ void loop() {
       //Serial.println(velC);
     }
     else if ((dataIn >= 8000000) && (dataIn < 9000000)) {
-      posD += dataIn - 8500000;
+      positions[1] += dataIn - 8500000;
       //Serial.print("posD");
       //Serial.println(posD);
     }
@@ -101,7 +107,7 @@ void loop() {
       //Serial.println(velD);
     }
     else if ((dataIn >= 10000000) && (dataIn < 11000000)) {
-      posE += dataIn - 10500000;
+      positions[2] += dataIn - 10500000;
       //Serial.print("posE");
       //Serial.println(posE);
     }
@@ -122,27 +128,26 @@ void loop() {
       zeros_E();
     }
     else if ((dataIn >= 15000000) && (dataIn < 16000000)) {
-      stepper_C.setCurrentPosition(posC);
-      stepper_D.setCurrentPosition(posD);
-      stepper_E.setCurrentPosition(posE);
+      stepper_C.setCurrentPosition(positions[0]);
+      stepper_D.setCurrentPosition(positions[1]);
+      stepper_E.setCurrentPosition(positions[2]);
     }
     else if ((dataIn >= 18000000) && (dataIn < 19000000)) {
-      posC = dataIn - 18500000;
+      positions[0] = dataIn - 18500000;
     }
     else if ((dataIn >= 19000000) && (dataIn < 20000000)) {
-      posD = dataIn - 19500000;
+      positions[1] = dataIn - 19500000;
     }
     else if ((dataIn >= 20000000) && (dataIn < 21000000)) {
-      posD = dataIn - 20500000;
+      positions[2] = dataIn - 20500000;
     }
 
-    stepper_C.moveTo(posC);
-    stepper_D.moveTo(posD);
-    stepper_E.moveTo(posE);
+    steppers.moveTo(positions);
   }
-  stepper_C.run();
-  stepper_D.run();
-  stepper_E.run();
+  if (go) {
+    steppers.runSpeedToPosition();
+    go = false;
+  }
 }
 
 void zeros_C() {
