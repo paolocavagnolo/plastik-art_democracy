@@ -56,6 +56,10 @@ void setup() {
 uint32_t velA = 1000;
 uint32_t velB = 1000;
 uint32_t dataIn = 0;
+
+long posA = 0;
+long posB = 0;
+
 long positions[2] = {0,0};
 
 bool go = false;

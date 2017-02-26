@@ -70,6 +70,10 @@ void setup() {
 
 long positions[3] = {0,0,0};
 
+long posC = 0;
+long posD = 0;
+long posE = 0;
+
 uint32_t velC = 1000;
 uint32_t velD = 1000;
 uint32_t velE = 1000;

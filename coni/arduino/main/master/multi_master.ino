@@ -180,12 +180,11 @@ void loop() {
     for (int i=0; i<5; i++) {
       Serial2.print(dataOut[i]);
     }
-    Serial2.print('\n');
+    Serial2.print(666);
     completo = 0;
   }
   if (completo == 6) {
     Serial2.print(dataOut[0]);
-    Serial2.print('\n');
     completo = 0;
   }
 
