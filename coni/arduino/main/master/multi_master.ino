@@ -210,6 +210,7 @@ void loop() {
             Serial.println(dataOut[completo]);
             Serial2.print(dataOut[completo]);
           }
+          break;
 
         default:
           Serial.println("comando inesistente");
