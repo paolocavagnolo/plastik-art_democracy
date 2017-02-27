@@ -128,7 +128,7 @@ void loop() {
           break;
         case 's':
           dataOut = 15500000;
-          Serial.println("stop")
+          Serial.println("stop");
           Serial2.print(dataOut);
           break;
         case 'z':
