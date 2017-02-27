@@ -62,15 +62,10 @@ long posB = 0;
 
 long positions[2] = {0,0};
 
-bool go = false;
-
 void loop() {
   if (mySerial.available()) {
     dataIn = mySerial.parseInt();
-    if (dataIn == 666) {
-      go = true;
-    }
-    else if (dataIn < 1000000) {
+    if (dataIn < 1000000) {
       positions[0] += dataIn - 500000;
       //Serial.print("posA");
       //Serial.println(posA);
@@ -114,10 +109,7 @@ void loop() {
     steppers.moveTo(positions);
   }
 
-  if (go) {
-    steppers.runSpeedToPosition();
-    go = false;
-  }
+  steppers.runSpeedToPosition();
   
 }
 
