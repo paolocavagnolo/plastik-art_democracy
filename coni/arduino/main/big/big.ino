@@ -7,17 +7,17 @@
 //MOTORE C 
 #define pinStep_C 2        
 #define pinDirection_C 3   
-#define pinSens_C A2
+#define pinSens_C A0
 
 //MOTORE D
 #define pinStep_D 4         
 #define pinDirection_D 5   
-#define pinSens_D A0
+#define pinSens_D A2
 
 //MOTORE E
 #define pinStep_E 6         
 #define pinDirection_E 7   
-#define pinSens_E A0
+#define pinSens_E A5
 
 #define RE 8
 #define DE 9

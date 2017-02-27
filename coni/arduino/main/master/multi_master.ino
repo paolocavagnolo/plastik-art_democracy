@@ -55,7 +55,14 @@ void loop() {
       switch (tag) {
         case 'a':   //pos A
           dataOut[completo] = dataIn * (100800 / 360) + 500000;
-          Serial.print(tag);
+          Serial.println(tag);
+
+          Serial.print(dataIn);
+          Serial.print(" // ");
+          Serial.print(dataOut[completo]);
+          Serial.print(" // ");
+          Serial.println(completo);
+          
           completo++;
           break;
         case 'A':
@@ -66,11 +73,25 @@ void loop() {
             dataOut[completo] = dataIn * (100800 / 360) + 16500000;
           }
           Serial.print(tag);
+
+          Serial.print(dataIn);
+          Serial.print(" // ");
+          Serial.print(dataOut[completo]);
+          Serial.print(" // ");
+          Serial.println(completo);
+
           completo = 6;
           break;
         case 'b':   //pos B
           dataOut[completo] = dataIn * (100800 / 360) + 2500000;
           Serial.print(tag);
+
+          Serial.print(dataIn);
+          Serial.print(" // ");
+          Serial.print(dataOut[completo]);
+          Serial.print(" // ");
+          Serial.println(completo);
+
           completo++;
           break;
         case 'B':   //vel B
@@ -81,11 +102,25 @@ void loop() {
             dataOut[completo] = dataIn * (100800 / 360) + 17500000;
           }
           Serial.print(tag);
+
+          Serial.print(dataIn);
+          Serial.print(" // ");
+          Serial.print(dataOut[completo]);
+          Serial.print(" // ");
+          Serial.println(completo);
+
           completo = 6;
           break;
         case 'c':   //pos C
           dataOut[completo] = dataIn * (100800 / 360) + 6500000;
           Serial.print(tag);
+
+          Serial.print(dataIn);
+          Serial.print(" // ");
+          Serial.print(dataOut[completo]);
+          Serial.print(" // ");
+          Serial.println(completo);
+          
           completo++;
           break;
         case 'C':
@@ -163,12 +198,6 @@ void loop() {
           Serial.println("comando inesistente");
           break;
       }
-
-      Serial.print(dataIn);
-      Serial.print(" // ");
-      Serial.print(dataOut[completo]);
-      Serial.print(" // ");
-      Serial.println(completo);
 
       inString = "";
 
