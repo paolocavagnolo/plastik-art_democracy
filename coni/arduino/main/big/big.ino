@@ -19,8 +19,8 @@
 #define pinDirection_E 7   
 #define pinSens_E A5
 
-#define RE 8
-#define DE 9
+#define RE 9
+#define DE 10
 
 #define MAXSPEED 6000
 #define MAXACC 400
