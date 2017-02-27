@@ -1,35 +1,45 @@
-#define SWITCH 12
-
-#define RE 6
-#define DE 7
-
-uint8_t tracks[16] = {53,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38};
-
 void setup() {
+  // put your setup code here, to run once:
+  pinMode(53, OUTPUT);
+  pinMode(52, OUTPUT);
+  pinMode(51, OUTPUT);
+  pinMode(50, OUTPUT);
 
   Serial.begin(9600);
   Serial2.begin(4800);
 
-  pinMode(SWITCH, INPUT_PULLUP);
- 
-  pinMode(RE, OUTPUT);
-  pinMode(DE, OUTPUT);
-  digitalWrite(RE, HIGH);
-  digitalWrite(DE, HIGH);
+  pinMode(12, INPUT_PULLUP);
+
+  pinMode(6, OUTPUT);
+  pinMode(7, OUTPUT);
+  digitalWrite(6, HIGH);
+  digitalWrite(7, HIGH);
 
 }
 
+bool oki = false;
 uint32_t dataOut[5] = {0,0,0,0,0};
 long dataIn = 0;
-
 char tag;
 bool inv = false;
+
 uint8_t completo = 0;
 
 String inString = "";
 
 void loop() {
-
+  /*// put your main code here, to run repeatedly:
+    if (digitalRead(12)) {
+    digitalWrite(52,HIGH);
+    if (oki) {
+      Serial2.println("ciao");
+      oki = false;
+    }
+    }
+    else {
+    digitalWrite(52,LOW);
+    oki = true;
+    }*/
   if (Serial.available() > 0) {
     int inChar = Serial.read();
     if (isDigit(inChar)) {
@@ -55,14 +65,10 @@ void loop() {
       switch (tag) {
         case 'a':   //pos A
           dataOut[completo] = dataIn * (100800 / 360) + 500000;
-          Serial.println(tag);
-
+          Serial.print(tag);
           Serial.print(dataIn);
           Serial.print(" // ");
-          Serial.print(dataOut[completo]);
-          Serial.print(" // ");
-          Serial.println(completo);
-          
+          Serial.println(dataOut[completo]);
           completo++;
           break;
         case 'A':
@@ -73,25 +79,17 @@ void loop() {
             dataOut[completo] = dataIn * (100800 / 360) + 16500000;
           }
           Serial.print(tag);
-
           Serial.print(dataIn);
           Serial.print(" // ");
-          Serial.print(dataOut[completo]);
-          Serial.print(" // ");
-          Serial.println(completo);
-
-          completo = 6;
+          Serial.println(dataOut[completo]);
+          completo++;
           break;
         case 'b':   //pos B
           dataOut[completo] = dataIn * (100800 / 360) + 2500000;
           Serial.print(tag);
-
           Serial.print(dataIn);
           Serial.print(" // ");
-          Serial.print(dataOut[completo]);
-          Serial.print(" // ");
-          Serial.println(completo);
-
+          Serial.println(dataOut[completo]);
           completo++;
           break;
         case 'B':   //vel B
@@ -102,25 +100,17 @@ void loop() {
             dataOut[completo] = dataIn * (100800 / 360) + 17500000;
           }
           Serial.print(tag);
-
           Serial.print(dataIn);
           Serial.print(" // ");
-          Serial.print(dataOut[completo]);
-          Serial.print(" // ");
-          Serial.println(completo);
-
-          completo = 6;
+          Serial.println(dataOut[completo]);
+          completo++;
           break;
         case 'c':   //pos C
           dataOut[completo] = dataIn * (100800 / 360) + 6500000;
           Serial.print(tag);
-
           Serial.print(dataIn);
           Serial.print(" // ");
-          Serial.print(dataOut[completo]);
-          Serial.print(" // ");
-          Serial.println(completo);
-          
+          Serial.println(dataOut[completo]);
           completo++;
           break;
         case 'C':
@@ -131,11 +121,17 @@ void loop() {
             dataOut[completo] = dataIn * (100800 / 360) + 18500000;
           }
           Serial.print(tag);
-          completo = 6;
+          Serial.print(dataIn);
+          Serial.print(" // ");
+          Serial.println(dataOut[completo]);
+          completo++;
           break;
         case 'd':   //pos D
           dataOut[completo] = dataIn * (100800 / 360) + 8500000;
           Serial.print(tag);
+          Serial.print(dataIn);
+          Serial.print(" // ");
+          Serial.println(dataOut[completo]);
           completo++;
           break;
         case 'D':
@@ -146,11 +142,17 @@ void loop() {
             dataOut[completo] = dataIn * (100800 / 360) + 19500000;
           }
           Serial.print(tag);
-          completo = 6;
+          Serial.print(dataIn);
+          Serial.print(" // ");
+          Serial.println(dataOut[completo]);
+          completo++;
           break;
         case 'e':   //pos E
           dataOut[completo] = dataIn * (100800 / 360) + 10500000;
           Serial.print(tag);
+          Serial.print(dataIn);
+          Serial.print(" // ");
+          Serial.println(dataOut[completo]);
           completo++;
           break;
         case 'E':
@@ -161,39 +163,54 @@ void loop() {
             dataOut[completo] = dataIn * (100800 / 360) + 20500000;
           }
           Serial.print(tag);
+          Serial.print(dataIn);
+          Serial.print(" // ");
+          Serial.println(dataOut[completo]);
           completo++;
           break;
         case 's':
           dataOut[completo] = 15500000;
-          completo = 6;
+          Serial.print("Stop // ");
+          Serial.println(dataOut[completo]);
+          Serial2.print(dataOut[completo]);
+          completo++;
           break;
         case 'z':
+          Serial.println("z");
+          Serial.println(dataOut[completo]);
           switch (dataIn) {
             case 1:
-              dataOut[completo] = 4500000;
-              completo = 6;
+              Serial.print("zerosA // ");
+              Serial.println(4500000);
               break;
             case 2:
-              dataOut[completo] = 5500000;
-              completo = 6;
+              Serial.print("zerosB // ");
+              Serial.println(5500000);
               break;
             case 3:
-              dataOut[completo] = 12500000;
-              completo = 6;
+              Serial.print("zerosC // ");
+              Serial.println(12500000);
               break;
             case 4:
-              dataOut[completo] = 13500000;
-              completo = 6;
+              Serial.print("zerosD // ");
+              Serial.println(13500000);
               break;
             case 5:
-              dataOut[completo] = 14500000;
-              completo = 6;
+              Serial.print("zerosE // ");
+              Serial.println(14500000);
               break;
             default:
               Serial.println("motore non esistente");
               break;
+          completo++;
           }
           break;
+        case 'g':
+          for (uint8_t i = 0; i<completo; i++) {
+            Serial.println(dataOut[completo]);
+            Serial2.print(dataOut[completo]);
+          }
+
         default:
           Serial.println("comando inesistente");
           break;
@@ -201,19 +218,7 @@ void loop() {
 
       inString = "";
 
-    }
-  }
+    } //chiudo if inChar == '\n'
 
-  if (completo == 5) {
-    for (int i=0; i<5; i++) {
-      Serial2.print(dataOut[i]);
-    }
-    Serial2.print(666);
-    completo = 0;
-  }
-  if (completo == 6) {
-    Serial2.print(dataOut[0]);
-    completo = 0;
-  }
-
+  } // chiudo if serial available
 }
