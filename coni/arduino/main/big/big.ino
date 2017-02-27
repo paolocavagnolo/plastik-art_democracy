@@ -199,7 +199,7 @@ void zeros_E() {
     stepper_E.run();
   }
   stepper_E.setCurrentPosition(0);
-  posD = 0;
+  posE = 0;
 
 }
 
