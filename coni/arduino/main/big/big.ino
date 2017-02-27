@@ -23,7 +23,7 @@
 #define DE 10
 
 #define MAXSPEED 6000
-#define MAXACC 400
+#define MAXACC 4000
 
 SoftwareSerial mySerial(pinRX, pinTX);
 AccelStepper stepper_C(1, pinStep_C, pinDirection_C);
