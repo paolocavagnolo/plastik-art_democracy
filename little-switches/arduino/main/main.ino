@@ -1,5 +1,6 @@
 /* scritto da Paolo Cavagnolo 03-03-17 */
-/* codice definitivo ancora da testare */
+/* codice definitivo ancora da tespare */
+
 
 #define zampaAS 8
 #define zampaAD 6
@@ -19,6 +20,7 @@ unsigned long volo = 0;
 unsigned long appoggio = 0;
 unsigned long attesaCorta = 0;
 unsigned long attesaLunga = 0;
+unsigned long aspetta = 0;
 
 unsigned long ritmo = 200;
 unsigned long gioco = 600;
@@ -40,19 +42,20 @@ void setup() {
 
   pinMode(11, INPUT_PULLUP);
   pinMode(12, INPUT_PULLUP);
-  pinMode(13, INPUT_PULLUP);
 
-  if (60 > 512) {
+  if (analogRead(pot) > 512) {
     //veloce
     attesaCorta = 50;
     attesaLunga = 150;
     appoggio = 500;
+    aspetta = 600;
   }
   else {
     //lenta
-    attesaCorta = 70;
-    attesaLunga = 170;
-    appoggio = 900;
+    attesaCorta = 100;
+    attesaLunga = 120;
+    appoggio = 200;
+    aspetta = 780;
   }
 
   volo = (unsigned long)(attesaCorta + attesaLunga + attesaCorta);
@@ -60,31 +63,29 @@ void setup() {
   tOn[2] = (unsigned long)(attesaCorta + attesaLunga);
   tOn[3] = volo;
 
-  if (!digitalRead(11)) {
+  if (true) {
     zampeEnable = true;
   }
-  if (!digitalRead(12)) {
-    tamburoEnable = true;
-  }
-  if (!digitalRead(13)) {
-    piedeEnable = true;
-  }
-
 }
 
 
 void loop() {
 
   currentMillis = millis();
-  if (zampeEnable) {
-    galoppo(volo,appoggio);
+  
+  if (!digitalRead(11)) {
+    galoppo((unsigned long)(volo + appoggio), aspetta);
   }
-  if (tamburoEnable) {
-    rullo(ritmo);
+  else {
+    init_galoppo();
   }
-  if (piedeEnable) {
+  if (!digitalRead(12)) {
     calcio(gioco);
   }
+  else {
+    init_calcio();
+  }
+
 
 
 }
@@ -120,3 +121,30 @@ void blinka(uint8_t pin, unsigned long timeOn, unsigned long timeOff, uint8_t in
     }
   }
 }
+
+void init_galoppo() {
+  digitalWrite(zampaPS,LOW);
+  digitalWrite(zampaPD,LOW);
+  digitalWrite(zampaAS,LOW);
+  digitalWrite(zampaAD,LOW);
+
+  tOn[0] = currentMillis;
+  tOn[1] = (unsigned long)(currentMillis + attesaCorta);
+  tOn[2] = (unsigned long)(currentMillis + attesaCorta + attesaLunga);
+  tOn[3] = (unsigned long)(currentMillis + volo);
+
+  tOff[0] = 0;
+  tOff[1] = 0;
+  tOff[2] = 0;
+  tOff[3] = 0;
+  
+
+}
+
+void init_calcio() {
+  digitalWrite(piede,LOW);
+
+  tOn[5] = currentMillis;
+  tOff[5] = 0;
+}
+
