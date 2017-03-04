@@ -1,3 +1,6 @@
+/* scritto da Paolo Cavagnolo 03-03-17 */
+/* codice definitivo ancora da testare */
+
 #define zampaAS 8
 #define zampaAD 6
 #define zampaPS 7
