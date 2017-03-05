@@ -27,7 +27,6 @@ SerialCommand SCmd(mySerial);
 #define MAXSPEED 6000
 #define MAXACC 4000
 
-SoftwareSerial mySerial(pinRX, pinTX);
 AccelStepper stepper_C(1, pinStep_C, pinDirection_C);
 AccelStepper stepper_D(1, pinStep_D, pinDirection_D);
 AccelStepper stepper_E(1, pinStep_E, pinDirection_E);
@@ -113,9 +112,9 @@ void Process_command()
   if (arg != NULL)
   {
     aNumber=atoi(arg);    // Converts a char string to an integer
-    stepper_A.setMaxSpeed(aNumber);
-    stepper_B.setMaxSpeed(aNumber);
     stepper_C.setMaxSpeed(aNumber);
+    stepper_D.setMaxSpeed(aNumber);
+    stepper_E.setMaxSpeed(aNumber);
   }
 
 }
