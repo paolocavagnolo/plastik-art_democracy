@@ -3,10 +3,11 @@
 #include <MultiStepper.h>
 #include <SerialCommand.h>
 
-SerialCommand SCmd;
-
 #define pinRX 11
 #define pinTX 12
+
+SoftwareSerial mySerial(pinRX, pinTX);
+SerialCommand SCmd(mySerial);
 
 //MOTORE C
 #define pinStep_C 2
