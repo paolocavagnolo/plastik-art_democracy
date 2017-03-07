@@ -3,9 +3,14 @@
 #define SEL_B 31 //0 su 2
 #define BT_A A14 //0 premuto
 #define BT_B A8 //1 premuto
+#define SEL_Gp A5 //0 su G e 1 su p
 
 long muovi(char let, int vel, int posA, int posB, int posC = 0);
 long t0 = 0;
+long dd = 100;
+long tdd = 0;
+
+uint8_t channels[16] = {53,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38};
 
 void setup() {
   pinMode(MAINSW, INPUT_PULLUP);
@@ -13,6 +18,7 @@ void setup() {
   pinMode(SEL_B, INPUT_PULLUP);
   pinMode(BT_A, INPUT_PULLUP);
   pinMode(BT_B, INPUT_PULLUP);
+  pinMode(SEL_Gp, INPUT_PULLUP);
 
   Serial.begin(9600);
 
@@ -22,61 +28,77 @@ void setup() {
 int act = 0;
 long att1 = 0;
 long att2 = 0;
-bool inviato = false;
+bool inviatoG = false;
+bool inviatop = false;
 
 void loop() {
   while (digitalRead(MAINSW)) //SHOW
   {
     if (act == 0) {
-      t0 = millis();
+      t0= millis();
       Serial.println("ACT 0");
-      inviato = false;
+      inviatop = false;
+      inviatoG = false;
       act++;
     }
-    show();
+    show_uno();
   }
   while (!digitalRead(MAINSW)) //TEST
   {
     act = 0;
+
     if (Serial.available() > 0) {
       Serial2.write(Serial.read());
     }
+
     if ((digitalRead(SEL_A) == 0) && (digitalRead(SEL_B) == 1)) //A
     {
       if (digitalRead(BT_A) == 0)  //premuto
       {
-        Serial.println("motore A orario");
-        ///////////////////////////
-        Serial2.print("P 3000");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("p 10 0");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("G 3000");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("g 10 0 0");
-        Serial2.print('\r');
-        ////////////////////////////
+        if (digitalRead(SEL_Gp)) //1 è piccolo
+        {
+          Serial.println("motore A orario");
+          ///////////////////////////
+          Serial2.print("P 3000");
+          Serial2.print('\r');
+          delay(100);
+          Serial2.print("p 10 0");
+          Serial2.print('\r');
+        }
+        else
+        {
+          Serial.println("motore C orario");
+          Serial2.print("G 3000");
+          Serial2.print('\r');
+          delay(100);
+          Serial2.print("g 10 0 0");
+          Serial2.print('\r');
+          ////////////////////////////
+        }
         delay(1000);
       }
       else if (digitalRead(BT_B) == 1)  //premuto
       {
-        Serial.println("motore A/C antiorario");
-        ///////////////////////////
-        Serial2.print("P 3000");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("p -10 0");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("G 3000");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("g -10 0 0");
-        Serial2.print('\r');
-        ////////////////////////////
+        if (digitalRead(SEL_Gp)) //1 è piccolo
+        {
+          Serial.println("motore A antiorario");
+          ///////////////////////////
+          Serial2.print("P 3000");
+          Serial2.print('\r');
+          delay(100);
+          Serial2.print("p -10 0");
+          Serial2.print('\r');
+        }
+        else
+        {
+          Serial.println("motore C antiorario");
+          Serial2.print("G 3000");
+          Serial2.print('\r');
+          delay(100);
+          Serial2.print("g -10 0 0");
+          Serial2.print('\r');
+          ////////////////////////////
+        }
         delay(1000);
       }
     }
@@ -84,38 +106,51 @@ void loop() {
     {
       if (digitalRead(BT_A) == 0)  //premuto
       {
-        Serial.println("motore B/D orario");
-        ///////////////////////////
-        Serial2.print("P 3000");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("p 0 10");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("G 3000");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("g 0 -10 0");
-        Serial2.print('\r');
-        ////////////////////////////
+        if (digitalRead(SEL_Gp)) //1 è piccolo
+        {
+          Serial.println("motore B orario");
+          ///////////////////////////
+          Serial2.print("P 3000");
+          Serial2.print('\r');
+          delay(100);
+          Serial2.print("p 0 10");
+          Serial2.print('\r');
+        }
+        else
+        {
+          Serial.println("motore D orario");
+          Serial2.print("G 3000");
+          Serial2.print('\r');
+          delay(100);
+          Serial2.print("g 0 -10 0");
+          Serial2.print('\r');
+          ////////////////////////////
+        }
         delay(1000);
       }
       else if (digitalRead(BT_B) == 1)  //premuto
       {
-        Serial.println("motore B/D antiorario");
-        ///////////////////////////
-        Serial2.print("P 3000");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("p 0 -10");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("G 3000");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("g 0 10 0");
-        Serial2.print('\r');
-        ////////////////////////////
+        if (digitalRead(SEL_Gp)) //1 è piccolo
+        {
+          Serial.println("motore B antiorario");
+          ///////////////////////////
+          Serial2.print("P 3000");
+          Serial2.print('\r');
+          delay(100);
+          Serial2.print("p 0 -10");
+          Serial2.print('\r');
+        }
+        else
+        {
+          Serial.println("motore D antiorario");
+          Serial2.print("G 3000");
+          Serial2.print('\r');
+          delay(100);
+          Serial2.print("g 0 10 0");
+          Serial2.print('\r');
+          ////////////////////////////
+        }
+
         delay(1000);
       }
     }
@@ -123,206 +158,100 @@ void loop() {
     {
       if (digitalRead(BT_A) == 0)  //premuto
       {
-        Serial.println("motore C orario");
-        ///////////////////////////
-        Serial2.print("P 3000");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("p 0 0");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("G 3000");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("g 0 0 10");
-        Serial2.print('\r');
-        ////////////////////////////
+        if (digitalRead(SEL_Gp)) //1 è piccolo
+        {
+          Serial.println("motore inesistente");
+        }
+        else
+        {
+          Serial.println("motore E orario");
+          Serial2.print("G 3000");
+          Serial2.print('\r');
+          delay(100);
+          Serial2.print("g 0 0 10");
+          Serial2.print('\r');
+          ////////////////////////////
+        }
         delay(1000);
       }
       else if (digitalRead(BT_B) == 1)  //premuto
       {
-        Serial.println("motore C antiorario");
-        ///////////////////////////
-        Serial2.print("P 3000");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("p 0 0");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("G 3000");
-        Serial2.print('\r');
-        delay(100);
-        Serial2.print("g 0 0 -10");
-        Serial2.print('\r');
-        ////////////////////////////
+        if (digitalRead(SEL_Gp)) //1 è piccolo
+        {
+          Serial.println("motore inesistente");
+        }
+        else
+        {
+          Serial.println("motore E antiorario");
+
+          Serial2.print("G 3000");
+          Serial2.print('\r');
+          delay(100);
+          Serial2.print("g 0 0 -10");
+          Serial2.print('\r');
+          ////////////////////////////
+        }
         delay(1000);
       }
     }
   }
 }
 
-void show() {
+void attore(int scena,char let_G, int vel_G, int posG_a, int posG_b, int posG_c, char let_p, int vel_p, int posp_a, int posp_b, int pausa) {
 
-  //eppur si muove
-  if (act == 1) {
-    if (inviato == false) {
-      Serial.print("ACT ");
-      Serial.print(act);
-      Serial.print(" tempo: att1: ");
-
-      att1 = muovi('p',3500,-90,360);
-
-      Serial.print(att1);
-
-      att2 = 0;
-
-      Serial.print(" att2: ");
-      Serial.println(att2);
-
-      inviato = true;
+  if (act == scena) {
+    if (inviatoG == false) {
+      att1 = muovi(let_G,vel_G,posG_a,posG_b,posG_c);
+      digitalWrite(channels[act], HIGH);
+      inviatoG = true;
+      tdd = millis();
     }
-
-    if ((millis() - t0) > magg(att1,att2)) {
-      act++;
-      inviato = false;
+    if ((inviatop == false) && ((long)(millis() - tdd) > dd)) {
+      att2 = muovi(let_p,vel_p,posp_a,posp_b);
+      inviatop = true;
+    }
+    if ((long)(millis() - t0) > (long)(magg(att1,att2) + pausa)) {
+      inviatop = false;
+      inviatoG = false;
+      digitalWrite(channels[act], LOW);
       t0 = millis();
-    }
-  }
-
-  //ti riconosco
-  if (act == 2) {
-    if (inviato == false) {
-      Serial.print("ACT ");
-      Serial.print(act);
-      Serial.print(" tempo: att1: ");
-
-      att1 = muovi('p',1500,-90,0);
-
-      Serial.print(att1);
-
-      att2 = muovi('g',1800,90,-100,0);
-
-      Serial.print(" att2: ");
-      Serial.println(att2);
-
-      inviato = true;
-    }
-
-    if ((millis() - t0) > magg(att1,att2)) {
+      Serial.println(act);
       act++;
-      inviato = false;
-      t0 = millis() + 3000;
     }
   }
+}
 
-  //il pubblico
-  if (act == 3) {
-    if (inviato == false) {
-      Serial.print("ACT ");
-      Serial.print(act);
-      Serial.print(" tempo: att1: ");
+void show_uno() {
 
-      att1 = muovi('p',2000,90,0);
+  // attore(1,'g',2000, 0,  0,  0, 'p',2000, 0, 0,  8000); //def
+  //
+  // //intro
+  // attore(2,'g',2000, -180,  -180,  180, 'p',2000, -150, 180,  8000); //def
+  // attore(3,'g',2000, 0,  -180,  -180, 'p',2500, 150, -180,  8000); //def
+  // attore(4,'g',2000, 0,  80,  110, 'p',3400, -130, 180,  8000); //def
+  // attore(5,'g',3000, 180,  -250,  -110, 'p',1800, 130, -180,  8000); //def
 
-      Serial.print(att1);
+  //dance
+  // attore(6,'g',4000, -640,  300,  -720, 'p',0, 0, 0,  10000); //def
+  // attore(1,'g',4000, 110,  -310,  -190, 'p',0, 0, 0,  6000); //def
 
-      att2 = muovi('g',2000,-90,0,110);
+  //outro
+  attore(1,'g',2000, 180,  170,  180, 'p',0, 0, 0,  6000); //def
+  //
 
-      Serial.print(" att2: ");
-      Serial.println(att2);
+}
 
-      inviato = true;
-    }
+void show_def() {
 
-    if ((millis() - t0) > magg(att1,att2)) {
-      act++;
-      inviato = false;
-      t0 = millis() + 5000;
-    }
-  }
+  //intro
+  attore(1,'g',2000, -180,  -180,  180, 'p',3000, -240, 180,  2000); //def
+  attore(2,'g',2000, 0,  -180,  -180, 'p',2000, 240, -180,  2000); //def
+  attore(3,'g',2000, 0,  80,  110, 'p',3000, -130, 180,  2000); //def
+  attore(4,'g',2800, 180,  -80,  -110, 'p',2800, 130, -180,  2000); //def
 
-  //più pubblico
-  if (act == 4) {
-    if (inviato == false) {
-      Serial.print("ACT ");
-      Serial.print(act);
-      Serial.print(" tempo: att1: ");
-
-      att1 = muovi('p',3000,0,90);
-
-      Serial.print(att1);
-
-      att2 = muovi('g',3000,-90,100,0);
-
-      Serial.print(" att2: ");
-      Serial.println(att2);
-
-      inviato = true;
-    }
-
-    if ((millis() - t0) > magg(att1,att2)) {
-      act++;
-      inviato = false;
-      t0 = millis() + 4000;
-    }
-  }
-
-  //danza #1
-  if (act == 5) {
-    if (inviato == false) {
-      Serial.print("ACT ");
-      Serial.print(act);
-      Serial.print(" tempo: att1: ");
-
-      att1 = muovi('p',5000,360,720);
-
-      Serial.print(att1);
-
-      att2 = muovi('g',4800,-630,720,-830);
-
-      Serial.print(" att2: ");
-      Serial.println(att2);
-
-      inviato = true;
-    }
-
-    if ((millis() - t0) > magg(att1,att2)) {
-      act++;
-      inviato = false;
-      t0 = millis();
-    }
-  }
-
-  //danza #2
-  if (act == 6) {
-    if (inviato == false) {
-      Serial.print("ACT ");
-      Serial.print(act);
-      Serial.print(" tempo: att1: ");
-
-      att1 = muovi('p',5200,360,720);
-
-      Serial.print(att1);
-
-      att2 = muovi('g',5000,-630,720,-830);
-
-      Serial.print(" att2: ");
-      Serial.println(att2);
-
-      inviato = true;
-    }
-
-    if ((millis() - t0) > magg(att1,att2)) {
-      act++;
-      inviato = false;
-      t0 = millis();
-    }
-  }
-
-
-
-
-
+  //dance
+  attore(5,'g',4000, -720,  -90,  -720, 'p',4000, 720, 720,  2000); //def
+  attore(6,'g',4000, 720,  90,  720, 'p',4000, -720, -720,  2000); //def
 
 }
 
@@ -341,14 +270,14 @@ long muovi(char let, int vel, int posA, int posB, int posC = 0) {
   if (let == 'p') {
     char LET = 'P';
 
+    payload = "";
+
     payload += LET;
     payload += " ";
     payload += String(vel);
     payload += '\r';
 
     Serial2.print(payload);
-
-    delay(100);
 
     payload = "";
 
@@ -365,14 +294,14 @@ long muovi(char let, int vel, int posA, int posB, int posC = 0) {
   else if (let == 'g') {
     char LET = 'G';
 
+    payload = "";
+
     payload += LET;
     payload += " ";
     payload += String(vel);
     payload += '\r';
 
     Serial2.print(payload);
-
-    delay(100);
 
     payload = "";
 
