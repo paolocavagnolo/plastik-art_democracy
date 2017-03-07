@@ -203,11 +203,15 @@ void attore(int scena,char let_G, int vel_G, int posG_a, int posG_b, int posG_c,
     if (inviatoG == false) {
       att1 = muovi(let_G,vel_G,posG_a,posG_b,posG_c);
       digitalWrite(channels[act], HIGH);
+      Serial.println("mando scena G");
+      Serial.println(act);
       inviatoG = true;
       tdd = millis();
     }
     if ((inviatop == false) && ((long)(millis() - tdd) > dd)) {
       att2 = muovi(let_p,vel_p,posp_a,posp_b);
+      Serial.println("mando scena p");
+      Serial.println(act);
       inviatop = true;
     }
     if ((long)(millis() - t0) > (long)(magg(att1,att2) + pausa)) {
@@ -215,7 +219,7 @@ void attore(int scena,char let_G, int vel_G, int posG_a, int posG_b, int posG_c,
       inviatoG = false;
       digitalWrite(channels[act], LOW);
       t0 = millis();
-      Serial.println(act);
+
       act++;
     }
   }
@@ -223,20 +227,18 @@ void attore(int scena,char let_G, int vel_G, int posG_a, int posG_b, int posG_c,
 
 void show_uno() {
 
-  // attore(1,'g',2000, 0,  0,  0, 'p',2000, 0, 0,  8000); //def
-  //
   // //intro
-  // attore(2,'g',2000, -180,  -180,  180, 'p',2000, -150, 180,  8000); //def
-  // attore(3,'g',2000, 0,  -180,  -180, 'p',2500, 150, -180,  8000); //def
-  // attore(4,'g',2000, 0,  80,  110, 'p',3400, -130, 180,  8000); //def
-  // attore(5,'g',3000, 180,  -250,  -110, 'p',1800, 130, -180,  8000); //def
+  attore(1,'g',2000, -180,  -180,  180, 'p',2000, -150, 180,  8000); //def
+  attore(2,'g',2000, 0,  -180,  -180, 'p',2500, 150, -180,  8000); //def
+  attore(3,'g',2000, 0,  80,  110, 'p',3400, -130, 180,  8000); //def
+  attore(4,'g',3000, 180,  -250,  -110, 'p',1800, 130, -180,  8000); //def
 
   //dance
-  // attore(6,'g',4000, -640,  300,  -720, 'p',0, 0, 0,  10000); //def
-  // attore(1,'g',4000, 110,  -310,  -190, 'p',0, 0, 0,  6000); //def
+  attore(5,'g',4000, -640,  300,  -720, 'p',3000, 540, -540,  15000); //def
+  attore(6,'g',4000, 110,  -310,  -190, 'p',3000, -360, 360,  6000); //def
 
   //outro
-  attore(1,'g',2000, 180,  170,  180, 'p',0, 0, 0,  6000); //def
+  attore(7,'g',2000, 160,  170,  180, 'p',1500, 175, -170,  6000); //def
   //
 
 }
