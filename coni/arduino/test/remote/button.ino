@@ -51,6 +51,10 @@ void loop() {
       act++;
       att1 = 0;
       att2 = 0;
+      Serial.print(digitalRead(SEL_A));
+      Serial.print(" ");
+      Serial.print(digitalRead(SEL_B));
+      Serial.println(" ");
     }
     if ((digitalRead(SEL_A) == 0) && (digitalRead(SEL_B) == 1)) //A
     {
@@ -118,8 +122,8 @@ void attore(int scena, char let_G, int vel_G, int posG_a, int posG_b, int posG_c
 void show_uno() {
 
   //intro
-  attore(1, 'g', 2000, -180,  -180,  180, 'p', 2000, -150, 180,  8000); //def
-  attore(2, 'g', 2000, 0,  -180,  -180, 'p', 2500, 150, -180,  8000); //def
+  attore(1, 'g', 2000, -180,  -180,  160, 'p', 2000, -150, 180,  8000); //def
+  attore(2, 'g', 2000, 0,  -180,  -160, 'p', 2500, 150, -180,  8000); //def
   attore(3, 'g', 2000, 0,  80,  110, 'p', 3400, -130, 180,  8000); //def
   attore(4, 'g', 3000, 180,  -250,  -110, 'p', 1800, 130, -180,  8000); //def
 
@@ -250,7 +254,7 @@ void checkButton() {
       else
       {
         Serial.println("motore C orario");
-        muovi('g',3000, vel_passetti,0,0);
+        muovi('g', vel_passetti, passetto,0);
       }
       delay(1000);
     }
