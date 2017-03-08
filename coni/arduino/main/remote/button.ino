@@ -43,6 +43,7 @@ bool inviatop = false;
 void loop() {
   while (digitalRead(MAINSW)) //SHOW
   {
+    digitalWrite(channels[15],LOW);
     if (act == 0) {
       t0 = millis();
       Serial.println("ACT 0");
@@ -73,6 +74,8 @@ void loop() {
   }
   while (!digitalRead(MAINSW)) //TEST
   {
+    
+
     // Reset the Act. for the Next Show.
     act = 0;
 
