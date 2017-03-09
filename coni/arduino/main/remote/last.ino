@@ -18,6 +18,7 @@ long tdd = 0;
 uint8_t channels[NUM_CHANNELS] = {53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38};
 
 void setup() {
+  //button and switch setup
   pinMode(MAINSW, INPUT_PULLUP);
   pinMode(SEL_A, INPUT_PULLUP);
   pinMode(SEL_B, INPUT_PULLUP);
@@ -25,6 +26,7 @@ void setup() {
   pinMode(BT_B, INPUT_PULLUP);
   pinMode(SEL_Gp, INPUT_PULLUP);
 
+  //
   for (int i=0; i<NUM_CHANNELS; i++) {
     pinMode(channels[i], OUTPUT);
   }
